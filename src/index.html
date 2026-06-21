@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>待办提醒</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- 顶部工具栏 -->
+    <header class="toolbar">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="搜索待办...">
+      </div>
+      <div class="filters">
+        <select id="filterStatus">
+          <option value="all">全部状态</option>
+          <option value="active">未完成</option>
+          <option value="completed">已完成</option>
+        </select>
+        <select id="filterCategory">
+          <option value="all">全部分类</option>
+        </select>
+        <select id="filterPriority">
+          <option value="all">全部优先级</option>
+          <option value="high">高优先级</option>
+          <option value="medium">中优先级</option>
+          <option value="low">低优先级</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <!-- 左侧：添加/编辑表单 -->
+      <aside class="sidebar">
+        <h2 id="formTitle">添加待办</h2>
+        <form id="todoForm">
+          <input type="hidden" id="editId">
+          <div class="form-group">
+            <label for="title">标题 *</label>
+            <input type="text" id="title" required>
+          </div>
+          <div class="form-group">
+            <label for="description">描述</label>
+            <textarea id="description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="category">分类</label>
+            <select id="category"></select>
+          </div>
+          <div class="form-group">
+            <label for="priority">优先级</label>
+            <select id="priority">
+              <option value="medium">中</option>
+              <option value="high">高</option>
+              <option value="low">低</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="remindAt">提醒时间</label>
+            <input type="datetime-local" id="remindAt">
+          </div>
+          <div class="form-group">
+            <label for="repeat">重复</label>
+            <select id="repeat">
+              <option value="none">不重复</option>
+              <option value="daily">每天</option>
+              <option value="weekly">每周</option>
+              <option value="monthly">每月</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">保存</button>
+            <button type="button" id="cancelEdit" class="btn-secondary" style="display:none;">取消</button>
+          </div>
+        </form>
+
+        <!-- 底部设置区 -->
+        <div class="settings-section">
+          <h3>设置</h3>
+          <div class="setting-item">
+            <label>
+              <input type="checkbox" id="autoLaunch"> 开机自启动
+            </label>
+          </div>
+          <div class="setting-actions">
+            <button id="exportBtn" class="btn-small">导出数据</button>
+            <button id="importBtn" class="btn-small">导入数据</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 右侧：待办列表 -->
+      <main class="todo-list-container">
+        <div class="todo-stats">
+          <span id="totalCount">共 0 项</span>
+          <span id="activeCount">未完成 0 项</span>
+        </div>
+        <ul id="todoList" class="todo-list">
+          <!-- 动态生成 -->
+        </ul>
+        <div id="emptyState" class="empty-state">
+          <p>暂无待办事项</p>
+          <p>在左侧添加一个吧</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
